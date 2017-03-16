@@ -1,6 +1,7 @@
 package algorithm
 
 import (
+	"fmt"
 	"k8s.io/kubernetes/pkg/api"
 	schedulerapi "k8s.io/kubernetes/plugin/pkg/scheduler/api"
 )
@@ -19,6 +20,7 @@ func LeastHostedPriority(args *schedulerapi.ExtenderArgs) schedulerapi.HostPrior
 }
 
 func calculateResourceScore(pod *api.Pod, node *api.Node) schedulerapi.HostPriority {
+	fmt.Printf("calculateResourceScore pod = %s, node = %s\n", pod.Name, node.Name)
 	allocatableMilliCPU := node.Status.Allocatable.Cpu().MilliValue()
 	allocatableMemory := node.Status.Allocatable.Memory().Value()
 	capacityMilliCPU := node.Status.Allocatable.Cpu().MilliValue()
